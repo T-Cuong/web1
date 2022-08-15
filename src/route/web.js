@@ -7,7 +7,8 @@ const initWebRoute = (app) => {
     // ta dang truyen tham so vao
     router.get('/',homeController.getHomepage);
     //:userId de lay tham so thay doi tren duong link url ta dung :va dat ten
-    router.get('/detail/user/:id', homeController.getDetailPage)
+    router.get('/detail/user/:id', homeController.getDetailPage);
+    router.post('/create-new-user',homeController.createNewUser);   
     //express se hieu web bat dau bang dau /
     return app.use('/', router)
 }
