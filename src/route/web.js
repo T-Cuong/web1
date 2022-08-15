@@ -5,7 +5,9 @@ let router = express.Router();
 
 const initWebRoute = (app) => {
     // ta dang truyen tham so vao
-    router.get('/',homeController.getHomepage)
+    router.get('/',homeController.getHomepage);
+    //:userId de lay tham so thay doi tren duong link url ta dung :va dat ten
+    router.get('/detail/user/:id', homeController.getDetailPage)
     //express se hieu web bat dau bang dau /
     return app.use('/', router)
 }
