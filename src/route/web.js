@@ -9,6 +9,10 @@ const initWebRoute = (app) => {
     //:userId de lay tham so thay doi tren duong link url ta dung :va dat ten
     router.get('/detail/user/:id', homeController.getDetailPage);
     router.post('/create-new-user',homeController.createNewUser);   
+    router.post('/delete-user', homeController.deleteUser); 
+    router.get('/edit-user/:id', homeController.getEditPage);
+     router.post('/update-user', homeController.postUpdateUser);
+     
     //express se hieu web bat dau bang dau /
     return app.use('/', router)
 }
