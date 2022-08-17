@@ -1,4 +1,6 @@
 import pool from '../configs/connectDB';
+import multer from 'multer';
+
 
 let getHomepage =async (req, res) => {
     //logic
@@ -80,6 +82,39 @@ let postUpdateUser = async (req, res) => {
     return res.redirect('/');
 }
 
+
+let getUploadFilePage = async (req, res) => {
+    return res.render('uploadFile.ejs')
+}
+
+//khai bao upload de biet dang dung multer va se cho no biet mot cai ten boi vi khi xu ly request no can mot cai ten de lay ra file
+const upload = multer().single('profile.pic');
+
+let handleUploadFile = async (req, res) => {
+    console.log(req.file)
+    upload(req, res, function (err){
+    if (req.fileValidationError) {
+
+        return res.send(req.fileValidationError);
+    }
+    else if (!req.file) {
+        return res.send('Please select an image to upload');
+    }
+    else if (err instanceof multer.MulterError){
+        return res.send(err);
+    }
+    else if(err){
+        return res.send(err);
+    }
+})
+    // Display uploaded image for user validation
+    res.send(`You have uploaded this image: <hr/><img src="/image/${req.file.filename}" width="500"><hr /><a href="/upload">Upload another image</a>`);
+    // });
+}
+
+
+
+
 module.exports = {
-    getHomepage, getDetailPage, createNewUser, deleteUser,getEditPage, postUpdateUser
+    getHomepage, getDetailPage, createNewUser, deleteUser,getEditPage, postUpdateUser, getUploadFilePage, handleUploadFile
 }

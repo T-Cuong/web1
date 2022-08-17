@@ -1,6 +1,7 @@
 import express from 'express';
 import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
+import initAPIRoute from './route/api';
 //import connection from './configs/connectDB';
 
 require('dotenv').config();//phai co cau nay thi process.env.port moi ko loi
@@ -15,6 +16,7 @@ app.use(express.json());
 //setup 
 configViewEngine(app);
 initWebRoute(app);
+initAPIRoute(app);
 app.listen(port, () => {
     console.log(`listen http://localhost:${port}`)
 })
